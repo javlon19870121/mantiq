@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<title>Mantiqiy amallar - 9-sinf</title>
+<style>
+  /* ===== 1-QADAM: Umumiy ko'rinish (dizayn) ===== */
+  /* Hammasi katta harfli va sodda bo'lishi uchun shrift kattalashtirildi */
+  * { box-sizing: border-box; }
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    margin: 0;
+    padding: 20px;
+    color: #1a1a1a;
+  }
+  .konteyner {
+    max-width: 850px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 34px;
+    text-align: center;
+    color: #0b3d91;
+  }
+  .blok {
+    background: #ffffff;
+    border: 3px solid #0b3d91;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .blok h2 {
+    font-size: 24px;
+    margin-top: 0;
+    color: #0b3d91;
+  }
+  p, li { font-size: 19px; line-height: 1.5; }
+
+  /* Tugmalar katta va bosilganda aniq ko'rinadi */
+  .tugma {
+    font-size: 20px;
+    padding: 16px 22px;
+    margin: 6px;
+    border: 3px solid #0b3d91;
+    background: #ffffff;
+    color: #0b3d91;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .tugma:hover { background: #e6edfb; }
+  .tugma.tanlangan {
+    background: #0b3d91;
+    color: #ffffff;
+  }
+  .tugma:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  .katta-tugma {
+    font-size: 24px;
+    padding: 18px 30px;
+    background: #16a34a;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 10px;
+  }
+  .katta-tugma:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+  }
+
+  .til-tugma {
+    font-size: 16px;
+    padding: 8px 14px;
+    margin: 4px;
+    border: 2px solid #0b3d91;
+    background: #fff;
+    color: #0b3d91;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .til-tugma.tanlangan {
+    background: #0b3d91;
+    color: #fff;
+  }
+
+  #natija-chiqishi {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 15px;
+  }
+  .natija-rost { background: #dcfce7; color: #166534; }
+  .natija-yolgon { background: #fee2e2; color: #991b1b; }
+
+  #xato-xabari {
+    color: #b91c1c;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 18px;
+  }
+  th, td {
+    border: 2px solid #cbd5e1;
+    padding: 10px;
+    text-align: center;
+  }
+  th { background: #0b3d91; color: #fff; }
+
+  .yoriqnoma {
+    font-size: 17px;
+    background: #fff7ed;
+    border: 3px solid #f59e0b;
+  }
+  .yoriqnoma code {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+<div class="konteyner">
+
+  <h1>Mantiqiy amallar - 9-sinf uchun dars vositasi</h1>
+
+  <!-- ===== 2-QADAM: Qisqacha tushuntirish bloki ===== -->
+  <div class="blok">
+    <h2>Mantiqiy amallar nima?</h2>
+    <p>Mantiqiy amallar faqat ikki xil qiymat bilan ishlaydi: <b>ROST (1)</b> va <b>YOLG'ON (0)</b>.</p>
+    <ul>
+      <li><b>VA (AND)</b> — natija faqat ikkala qiymat ham ROST bo'lsagina ROST bo'ladi.</li>
+      <li><b>YOKI (OR)</b> — natija kamida bitta qiymat ROST bo'lsa ROST bo'ladi.</li>
+      <li><b>EMAS (NOT)</b> — qiymatni teskarisiga aylantiradi (1 ni 0 ga, 0 ni 1 ga).</li>
+      <li><b>XOR</b> — qiymatlar bir-biridan farq qilsa ROST, bir xil bo'lsa YOLG'ON bo'ladi.</li>
+    </ul>
+  </div>
+
+  <!-- ===== 3-QADAM: Til tanlash (faqat amal/qiymat nomlari uchun) ===== -->
+  <div class="blok">
+    <h2>Amal nomlari qaysi tilda ko'rinsin?</h2>
+    <p>Bu tugma faqat amal va qiymat nomlarini tarjima qiladi. Tushuntirish matnlari doim o'zbek tilida qoladi.</p>
+    <button class="til-tugma tanlangan" data-til="uz" onclick="tilniTanla('uz')">O'zbekcha</button>
+    <button class="til-tugma" data-til="ru" onclick="tilniTanla('ru')">Русский</button>
+    <button class="til-tugma" data-til="en" onclick="tilniTanla('en')">English</button>
+  </div>
+
+  <!-- ===== 4-QADAM: Amalni tanlash tugmalari ===== -->
+  <div class="blok">
+    <h2>1. Amalni tanlang</h2>
+    <button class="tugma amal-tugma" data-amal="VA" onclick="amalniTanla('VA')"></button>
+    <button class="tugma amal-tugma" data-amal="YOKI" onclick="amalniTanla('YOKI')"></button>
+    <button class="tugma amal-tugma" data-amal="EMAS" onclick="amalniTanla('EMAS')"></button>
+    <button class="tugma amal-tugma" data-amal="XOR" onclick="amalniTanla('XOR')"></button>
+  </div>
+
+  <!-- ===== 5-QADAM: Qiymatlarni tanlash tugmalari ===== -->
+  <div class="blok">
+    <h2>2. 1-qiymatni tanlang</h2>
+    <button class="tugma qiymat1-tugma" data-qiymat="true" onclick="qiymatniTanla(1, true)"></button>
+    <button class="tugma qiymat1-tugma" data-qiymat="false" onclick="qiymatniTanla(1, false)"></button>
+
+    <h2 id="qiymat2-sarlavha">3. 2-qiymatni tanlang</h2>
+    <button class="tugma qiymat2-tugma" data-qiymat="true" onclick="qiymatniTanla(2, true)"></button>
+    <button class="tugma qiymat2-tugma" data-qiymat="false" onclick="qiymatniTanla(2, false)"></button>
+  </div>
+
+  <!-- ===== 6-QADAM: Natijani chiqarish va saqlash ===== -->
+  <div class="blok">
+    <h2>4. Natijani chiqaring</h2>
+    <button class="katta-tugma" id="yuborish-tugmasi" onclick="natijaniChiqar()">Natijani chiqar va saqlash</button>
+    <div id="natija-chiqishi"></div>
+    <div id="xato-xabari"></div>
+  </div>
+
+  <!-- ===== 7-QADAM: Oldingi natijalar ro'yxati ===== -->
+  <div class="blok">
+    <h2>Oldingi natijalar (Supabase'dan)</h2>
+    <div id="royxat-konteyner">Yuklanmoqda...</div>
+  </div>
+
+  <!-- ===== 8-QADAM: Foydalanish yo'riqnomasi ===== -->
+  <div class="blok yoriqnoma">
+    <h2>Supabase'ni sozlash bo'yicha yo'riqnoma</h2>
+    <ol>
+      <li><b>Loyiha ochish:</b> <a href="https://supabase.com" target="_blank">supabase.com</a> saytiga kirib ro'yxatdan o'tasiz va "New Project" tugmasi orqali yangi loyiha yaratasiz.</li>
+      <li><b>Jadval yaratish:</b> Chap menyudan <b>SQL Editor</b> bo'limini oching va shu faylning yuqori qismidagi (kod ichidagi izohlarda berilgan) SQL buyrug'ini to'liq nusxalab, "Run" tugmasini bosing.</li>
+      <li><b>URL va kalitni olish:</b> Chap menyudan <b>Project Settings → API</b> bo'limiga kiring. U yerda <code>Project URL</code> va <code>anon public</code> kalitni topasiz. Ularni shu faylning <code>SUPABASE_URL</code> va <code>SUPABASE_ANON_KEY</code> o'zgaruvchilariga joylashtiring.</li>
+      <li><b>"row-level security policy" xatosi chiqsa:</b> Bu RLS (Row Level Security) siyosati to'g'ri yozilmaganini bildiradi. SQL Editor'da quyidagi tekshiruvlarni qiling:
+        <ul>
+          <li>Jadvalda RLS yoqilganiga ishonch hosil qiling (<code>enable row level security</code>).</li>
+          <li><code>insert</code> va <code>select</code> uchun <code>anon</code> roliga policy yaratilganini tekshiring (pastdagi SQL'da bor).</li>
+          <li>Agar policy nomi takrorlansa, avval <code>drop policy</code> bilan eskisini o'chirib qayta yarating.</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+</div>
+
+<!-- ===== 9-QADAM: Supabase kutubxonasini ulaymiz (CDN orqali) ===== -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/*
+=====================================================================
+  QUYIDAGI SQL BUYRUG'INI SUPABASE "SQL EDITOR" GA NUSXALANG VA ISHGA
+  TUSHIRING. Bu jadval yaratadi, RLS'ni yoqadi va anon (public) roli
+  uchun INSERT va SELECT ruxsatlarini (policy) beradi.
+=====================================================================
+
+create table if not exists mantiq_natijalari (
+  id bigint generated by default as identity primary key,
+  created_at timestamptz not null default now(),
+  amal text not null,
+  qiymat1 boolean not null,
+  qiymat2 boolean,
+  natija boolean not null
+);
+
+alter table mantiq_natijalari enable row level security;
+
+drop policy if exists "anon_select_mantiq_natijalari" on mantiq_natijalari;
+create policy "anon_select_mantiq_natijalari"
+on mantiq_natijalari
+for select
+to anon
+using (true);
+
+drop policy if exists "anon_insert_mantiq_natijalari" on mantiq_natijalari;
+create policy "anon_insert_mantiq_natijalari"
+on mantiq_natijalari
+for insert
+to anon
+with check (true);
+
+=====================================================================
+*/
+
+// ===== 10-QADAM: Supabase ulanish ma'lumotlari =====
+// Faqat "anon public" kalitni ishlating. "service_role" kalitni HECH QACHON bu yerga yozmang!
+const SUPABASE_URL = "https://SIZNING-LOYIHA-ID.supabase.co"; // <-- bu yerga o'z qiymatlaringizni qo'ying
+const SUPABASE_ANON_KEY = "SIZNING-ANON-KALITINGIZ"; // <-- bu yerga o'z qiymatlaringizni qo'ying
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// ===== 11-QADAM: Til lug'ati (faqat amal va qiymat nomlari uchun) =====
+const lugat = {
+  uz: { VA: "VA", YOKI: "YOKI", EMAS: "EMAS", XOR: "XOR", rost: "ROST (1)", yolgon: "YOLG'ON (0)" },
+  ru: { VA: "И", YOKI: "ИЛИ", EMAS: "НЕ", XOR: "XOR", rost: "ИСТИНА (1)", yolgon: "ЛОЖЬ (0)" },
+  en: { VA: "AND", YOKI: "OR", EMAS: "NOT", XOR: "XOR", rost: "TRUE (1)", yolgon: "FALSE (0)" }
+};
+let joriyTil = "uz";
+
+// ===== 12-QADAM: Dastur holati (foydalanuvchi nima tanladi) =====
+let tanlanganAmal = null;      // "VA" | "YOKI" | "EMAS" | "XOR"
+let tanlanganQiymat1 = null;   // true | false
+let tanlanganQiymat2 = null;   // true | false | null (EMAS uchun kerak emas)
+
+// ===== 13-QADAM: Tugma matnlarini joriy tilga mos yangilash =====
+function matnlarniYangila() {
+  const l = lugat[joriyTil];
+  document.querySelectorAll(".amal-tugma").forEach(btn => {
+    btn.textContent = l[btn.dataset.amal];
+  });
+  document.querySelectorAll(".qiymat1-tugma, .qiymat2-tugma").forEach(btn => {
+    btn.textContent = btn.dataset.qiymat === "true" ? l.rost : l.yolgon;
+  });
+}
+
+function tilniTanla(til) {
+  joriyTil = til;
+  document.querySelectorAll(".til-tugma").forEach(btn => {
+    btn.classList.toggle("tanlangan", btn.dataset.til === til);
+  });
+  matnlarniYangila();
+}
+
+// ===== 14-QADAM: Amal tanlanganda ishlaydigan funksiya =====
+function amalniTanla(amal) {
+  tanlanganAmal = amal;
+  document.querySelectorAll(".amal-tugma").forEach(btn => {
+    btn.classList.toggle("tanlangan", btn.dataset.amal === amal);
+  });
+
+  // "EMAS" amali faqat 1 qiymat oladi, shuning uchun 2-qiymat tugmalarini o'chiramiz
+  const emasTanlandi = (amal === "EMAS");
+  document.querySelectorAll(".qiymat2-tugma").forEach(btn => btn.disabled = emasTanlandi);
+  document.getElementById("qiymat2-sarlavha").style.opacity = emasTanlandi ? "0.4" : "1";
+  if (emasTanlandi) {
+    tanlanganQiymat2 = null;
+    document.querySelectorAll(".qiymat2-tugma").forEach(btn => btn.classList.remove("tanlangan"));
+  }
+}
+
+// ===== 15-QADAM: Qiymat tanlanganda ishlaydigan funksiya =====
+function qiymatniTanla(qaysi, qiymat) {
+  if (qaysi === 1) {
+    tanlanganQiymat1 = qiymat;
+    document.querySelectorAll(".qiymat1-tugma").forEach(btn => {
+      btn.classList.toggle("tanlangan", btn.dataset.qiymat === String(qiymat));
+    });
+  } else {
+    tanlanganQiymat2 = qiymat;
+    document.querySelectorAll(".qiymat2-tugma").forEach(btn => {
+      btn.classList.toggle("tanlangan", btn.dataset.qiymat === String(qiymat));
+    });
+  }
+}
+
+// ===== 16-QADAM: Mantiqiy amal natijasini hisoblash =====
+function natijaniHisobla(amal, q1, q2) {
+  if (amal === "VA") return q1 && q2;
+  if (amal === "YOKI") return q1 || q2;
+  if (amal === "EMAS") return !q1;
+  if (amal === "XOR") return q1 !== q2;
+  return null;
+}
+
+// ===== 17-QADAM: "Natijani chiqar" tugmasi bosilganda ishlaydigan asosiy funksiya =====
+async function natijaniChiqar() {
+  const xatoKonteyner = document.getElementById("xato-xabari");
+  const natijaKonteyner = document.getElementById("natija-chiqishi");
+  const tugma = document.getElementById("yuborish-tugmasi");
+
+  xatoKonteyner.textContent = "";
+  natijaKonteyner.textContent = "";
+  natijaKonteyner.className = "";
+
+  // --- Bo'sh maydonlarni tekshirish (yubormasdan oldin) ---
+  if (!tanlanganAmal) {
+    xatoKonteyner.textContent = "Iltimos, avval amalni tanlang.";
+    return;
+  }
+  if (tanlanganQiymat1 === null) {
+    xatoKonteyner.textContent = "Iltimos, 1-qiymatni tanlang.";
+    return;
+  }
+  if (tanlanganAmal !== "EMAS" && tanlanganQiymat2 === null) {
+    xatoKonteyner.textContent = "Iltimos, 2-qiymatni tanlang.";
+    return;
+  }
+
+  // --- Natijani hisoblaymiz ---
+  const natija = natijaniHisobla(tanlanganAmal, tanlanganQiymat1, tanlanganQiymat2);
+
+  natijaKonteyner.textContent = natija ? "1 (ROST)" : "0 (YOLG'ON)";
+  natijaKonteyner.className = natija ? "natija-rost" : "natija-yolgon";
+
+  // --- Tugmani vaqtincha o'chirib, "Yuborilmoqda..." deb yozamiz ---
+  tugma.disabled = true;
+  const eskiMatn = tugma.textContent;
+  tugma.textContent = "Yuborilmoqda...";
+
+  try {
+    // --- Supabase jadvaliga yangi natijani yozamiz ---
+    const { error } = await supabase
+      .from("mantiq_natijalari")
+      .insert({
+        amal: tanlanganAmal,
+        qiymat1: tanlanganQiymat1,
+        qiymat2: tanlanganAmal === "EMAS" ? null : tanlanganQiymat2,
+        natija: natija
+      });
+
+    if (error) throw error;
+
+    // --- Muvaffaqiyatli saqlangandan keyin ro'yxatni yangilaymiz ---
+    await royxatniYukla();
+  } catch (xato) {
+    // --- Xatolik bo'lsa, ekranda ko'rsatamiz (faqat console.log qilmaymiz) ---
+    xatoKonteyner.textContent = "Xatolik yuz berdi: " + xato.message;
+  } finally {
+    // --- Tarmoq sekin bo'lsa ham dastur qotib qolmasligi uchun doim qaytaramiz ---
+    tugma.disabled = false;
+    tugma.textContent = eskiMatn;
+  }
+}
+
+// ===== 18-QADAM: Oldingi natijalar ro'yxatini Supabase'dan o'qib ko'rsatish =====
+async function royxatniYukla() {
+  const konteyner = document.getElementById("royxat-konteyner");
+  konteyner.textContent = "Yuklanmoqda...";
+
+  try {
+    const { data, error } = await supabase
+      .from("mantiq_natijalari")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(20);
+
+    if (error) throw error;
+
+    if (!data || data.length === 0) {
+      konteyner.textContent = "Hozircha yozuv yo'q";
+      return;
+    }
+
+    let jadvalHtml = "<table><tr><th>Amal</th><th>1-qiymat</th><th>2-qiymat</th><th>Natija</th><th>Vaqti</th></tr>";
+    data.forEach(qator => {
+      const q1 = qator.qiymat1 ? "1" : "0";
+      const q2 = (qator.qiymat2 === null || qator.qiymat2 === undefined) ? "-" : (qator.qiymat2 ? "1" : "0");
+      const nat = qator.natija ? "1" : "0";
+      const vaqt = new Date(qator.created_at).toLocaleString();
+      jadvalHtml += `<tr><td>${qator.amal}</td><td>${q1}</td><td>${q2}</td><td>${nat}</td><td>${vaqt}</td></tr>`;
+    });
+    jadvalHtml += "</table>";
+    konteyner.innerHTML = jadvalHtml;
+  } catch (xato) {
+    konteyner.textContent = "Ro'yxatni yuklashda xatolik: " + xato.message;
+  }
+}
+
+// ===== 19-QADAM: Sahifa ochilganda boshlang'ich holatni tayyorlaymiz =====
+matnlarniYangila();
+royxatniYukla();
+</script>
+</body>
+</html>
